@@ -1,4 +1,5 @@
-import { Controller, get, post } from '../decorator/index'
+
+import { Controller, get, post } from 'koa-router-decorators-up'
 import { Context, Next } from 'koa';
 import userSchema, { userSchemaType } from '../mongo/models/user'
 @Controller('/user')

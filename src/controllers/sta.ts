@@ -1,14 +1,16 @@
-import { Controller, Method, RequestMapping } from '../decorator/index'
+// @ts-ignore body不在request的定义上屏蔽此错误
+import { Controller, get } from 'koa-router-decorators-up'
 import * as Koa from 'koa'
-@Controller('/a')
+@Controller('/test')
 export default class startApi {
-    @RequestMapping('/ee', Method.GET)
+    // 括号中如果不传入参数  则自动拼接url 即：/test/getIndex
+    @get()
     async getIndex(ctx: Koa.Context, next: Function) {
         ctx.body = {
             a : 66666
         }
     }
-    @RequestMapping('/stringe', Method.GET)
+    @get('/getString')
     async getString(ctx: Koa.Context, next: Function) {
         ctx.body = 'koa2 string'
     }

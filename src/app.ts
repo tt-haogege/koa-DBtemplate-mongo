@@ -3,17 +3,17 @@ import Koa from 'koa'
 import appConfig from "./appConfig"
 import middleware from "./middleware"
 import { resolve } from "path"
-const app = new Koa()
+import loadController from 'koa-router-decorators-up'
+
 const KoaRouter = require('koa-router')
 const onerror= require('koa-onerror')
 const router = new KoaRouter()
-import loadController from './decorator/index'
-middleware(app)
+const app = new Koa()
 loadController(router, resolve(__dirname, './controllers'))
 app.use(router.routes())
 app.use(router.allowedMethods())
-// app.use(users.routes(), users.allowedMethods())
 // error-handling
+middleware(app)
 app.on('error', (err: Error, ctx: Koa.Context) => {
   console.error('server error', err, ctx)
 });
